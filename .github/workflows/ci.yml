@@ -31,3 +31,19 @@ jobs:
         with:
           name: artifacts
           path: build/libs/*.jar
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'adopt'
+
+      - name: Run tests
+        run: ./gradlew test
