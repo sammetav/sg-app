@@ -40,7 +40,7 @@ tasks.withType<KotlinCompile> {
 
 ktlint {
     disabledRules.set(setOf("no-wildcard-imports"))
-    disabledRules.set(setOf("no-trailing-comma"))
+    disabledRules.set(setOf("final-newline"))
 }
 
 tasks.withType<Test> {
