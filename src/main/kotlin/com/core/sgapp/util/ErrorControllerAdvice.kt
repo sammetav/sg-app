@@ -16,9 +16,5 @@ class ErrorControllerAdvice {
         return ex.message?.let { ErrorResponse(HttpStatus.NOT_FOUND.value(), it) }
     }
 
-    // Add more exception handlers for other custom exceptions or standard exceptions as needed
-
-
     data class ErrorResponse(val status: Int, val message: String)
-
 }

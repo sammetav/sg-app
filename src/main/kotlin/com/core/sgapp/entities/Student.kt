@@ -2,7 +2,6 @@ package com.core.sgapp.entities
 
 import jakarta.persistence.*
 
-
 @Entity
 @Table(name = "student")
 class Student(

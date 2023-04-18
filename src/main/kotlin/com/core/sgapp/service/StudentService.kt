@@ -8,11 +8,10 @@ import com.core.sgapp.util.UserNotFoundException
 import org.springframework.stereotype.Service
 import java.util.*
 
-
 @Service
 class StudentService(
     private val studentRepository: StudentRepository,
-    private val schoolService: SchoolService,
+    private val schoolService: SchoolService
 ) {
     fun getAllStudents(): MutableList<Student> {
         return studentRepository.findAll()
