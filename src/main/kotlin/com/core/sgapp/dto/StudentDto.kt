@@ -1,7 +1,6 @@
 package com.core.sgapp.dto
 
 import com.core.sgapp.entities.Gender
-import com.core.sgapp.entities.School
 import com.core.sgapp.entities.Student
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -10,33 +9,32 @@ data class StudentDto(
     val id: Long? = null,
     val firstName: String? = null,
     val lastName: String? = null,
-    val gender: Gender? = null,
-    val school: School
+    val gender: String? = null,
+    val active: Boolean? = null
 ) {
-    //constructor(firstName: String?, lastName: String?, school: School) : this(null, firstName, lastName, school)
+    // constructor(firstName: String?, lastName: String?, school: School) : this(null, firstName, lastName, school)
 
     @JsonCreator
     fun fromJson(
         @JsonProperty("id") id: Long?,
         @JsonProperty("firstName") firstName: String?,
         @JsonProperty("lastName") lastName: String?,
-        @JsonProperty("gender") gender: Gender?,
-        @JsonProperty("school") school: School,
+        @JsonProperty("gender") gender: String?,
+        @JsonProperty("active") active: Boolean?
     ): StudentDto =
         StudentDto(
             id = id,
             firstName = firstName,
             lastName = lastName,
-            gender = gender,
-            school = school,
+            gender = gender
         )
 
     fun toEntity(): Student {
-        return Student(
-            firstName = this.firstName,
-            lastName = this.lastName,
-            gender = this.gender,
-            school = this.school,
-        )
+        val student = Student()
+        student.firstName = this.firstName
+        student.lastName = this.lastName
+        student.gender = if (!this.gender.isNullOrEmpty()) Gender.valueOf(this.gender) else null
+        student.active = this.active ?: false
+        return student
     }
 }

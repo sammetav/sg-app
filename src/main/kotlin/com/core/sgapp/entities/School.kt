@@ -12,5 +12,4 @@ class School(
     var city: String? = null,
     var state: String? = null,
     var active: Boolean? = false
-) : BaseEntity() {
-}
+) : BaseEntity()
