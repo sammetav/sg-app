@@ -35,5 +35,4 @@ class SchoolController(
     fun deleteSchool(@PathVariable schoolId: Long) {
         schoolService.deleteSchool(schoolId)
     }
-
 }

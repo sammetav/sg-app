@@ -44,5 +44,4 @@ class SchoolService(
 
     private fun checkIfSchoolExists(schoolId: Long): School? = schoolRepository.findById(schoolId)
         .orElseThrow { EntityNotFoundException("School not found with id: $schoolId") }
-
 }

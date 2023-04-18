@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface SchoolRepository: JpaRepository<School, Long> {
-}
+interface SchoolRepository : JpaRepository<School, Long>
