@@ -40,6 +40,7 @@ tasks.withType<KotlinCompile> {
 
 ktlint {
     disabledRules.set(setOf("no-wildcard-imports"))
+    disabledRules.set(setOf("no-trailing-comma"))
 }
 
 tasks.withType<Test> {

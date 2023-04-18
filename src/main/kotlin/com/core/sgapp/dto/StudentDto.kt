@@ -10,7 +10,7 @@ data class StudentDto(
     val firstName: String? = null,
     val lastName: String? = null,
     val gender: String? = null,
-    val active: Boolean? = null
+    val active: Boolean? = null,
 ) {
     // constructor(firstName: String?, lastName: String?, school: School) : this(null, firstName, lastName, school)
 
