@@ -38,6 +38,10 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+ktlint {
+    disabledRules.set(setOf("no-wildcard-imports"))
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
