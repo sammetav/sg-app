@@ -23,7 +23,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build and Compile
-        run: ./gradlew build
+        run: ./gradlew clean build
 
       - name: Archive artifacts
         run: ./gradlew assemble
