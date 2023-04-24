@@ -9,29 +9,32 @@ data class StudentDto(
     val id: Long? = null,
     val firstName: String? = null,
     val lastName: String? = null,
-    val gender: Gender? = null,
+    val gender: String? = null,
+    val active: Boolean? = null,
 ) {
-    constructor(firstName: String?, lastName: String?) : this(null, firstName, lastName)
+    // constructor(firstName: String?, lastName: String?, school: School) : this(null, firstName, lastName, school)
 
     @JsonCreator
     fun fromJson(
         @JsonProperty("id") id: Long?,
         @JsonProperty("firstName") firstName: String?,
         @JsonProperty("lastName") lastName: String?,
-        @JsonProperty("gender") gender: Gender?,
+        @JsonProperty("gender") gender: String?,
+        @JsonProperty("active") active: Boolean?
     ): StudentDto =
         StudentDto(
             id = id,
             firstName = firstName,
             lastName = lastName,
-            gender = gender,
+            gender = gender
         )
 
     fun toEntity(): Student {
-        return Student(
-            firstName = this.firstName,
-            lastName = this.lastName,
-            gender = this.gender
-        )
+        val student = Student()
+        student.firstName = this.firstName
+        student.lastName = this.lastName
+        student.gender = if (!this.gender.isNullOrEmpty()) Gender.valueOf(this.gender) else null
+        student.active = this.active ?: false
+        return student
     }
 }

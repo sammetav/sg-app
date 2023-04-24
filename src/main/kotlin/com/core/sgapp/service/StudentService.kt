@@ -3,21 +3,25 @@ package com.core.sgapp.service
 import com.core.sgapp.dto.StudentDto
 import com.core.sgapp.entities.Student
 import com.core.sgapp.repository.StudentRepository
+import com.core.sgapp.util.EntityNotFoundException
 import com.core.sgapp.util.UserNotFoundException
 import org.springframework.stereotype.Service
 import java.util.*
 
-
 @Service
 class StudentService(
-    private val studentRepository: StudentRepository
+    private val studentRepository: StudentRepository,
+    private val schoolService: SchoolService
 ) {
     fun getAllStudents(): MutableList<Student> {
         return studentRepository.findAll()
     }
 
-    fun createStudent(studentDto: StudentDto): Student {
-        return studentRepository.save(studentDto.toEntity())
+    fun createStudent(schoolId: Long, studentDto: StudentDto): Student {
+        val student = studentDto.toEntity()
+        val school = schoolService.findSchoolById(schoolId)
+        student.school = school.orElseThrow { EntityNotFoundException("School not found with ID: $schoolId") }
+        return studentRepository.save(student)
     }
 
     fun updateStudent(id: String, studentDto: StudentDto): Student? {

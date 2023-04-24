@@ -2,6 +2,7 @@ package com.core.sgapp.controller
 
 import com.core.sgapp.dto.StudentDto
 import com.core.sgapp.entities.Student
+import com.core.sgapp.service.SchoolService
 import com.core.sgapp.service.StudentService
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -9,7 +10,8 @@ import java.util.*
 @RestController
 @RequestMapping("api/")
 class StudentController(
-    private val studentService: StudentService
+    private val studentService: StudentService,
+    private val schoolService: SchoolService,
 ) {
 
     @GetMapping("allStudents")
@@ -22,9 +24,12 @@ class StudentController(
         return studentService.getStudentById(id)
     }
 
-    @PostMapping("createStudent")
-    fun createStudent(@RequestBody studentDto: StudentDto): Student {
-        return studentService.createStudent(studentDto = studentDto)
+    @PostMapping("/{schoolId}/createStudent")
+    fun createStudent(
+        @PathVariable schoolId: Long,
+        @RequestBody studentDto: StudentDto
+    ): Student {
+        return studentService.createStudent(schoolId, studentDto = studentDto)
     }
 
     @PutMapping("updateStudent/{id}")
