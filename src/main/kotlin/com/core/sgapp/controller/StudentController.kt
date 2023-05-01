@@ -26,7 +26,7 @@ class StudentController(
 
     @PostMapping("/{schoolId}/createStudent")
     fun createStudent(
-        @PathVariable schoolId: Long,
+        @PathVariable schoolId: UUID,
         @RequestBody studentDto: StudentDto
     ): Student {
         return studentService.createStudent(schoolId, studentDto = studentDto)

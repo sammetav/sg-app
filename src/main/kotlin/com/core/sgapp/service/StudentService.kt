@@ -17,7 +17,7 @@ class StudentService(
         return studentRepository.findAll()
     }
 
-    fun createStudent(schoolId: Long, studentDto: StudentDto): Student {
+    fun createStudent(schoolId: UUID, studentDto: StudentDto): Student {
         val student = studentDto.toEntity()
         val school = schoolService.findSchoolById(schoolId)
         student.school = school.orElseThrow { EntityNotFoundException("School not found with ID: $schoolId") }

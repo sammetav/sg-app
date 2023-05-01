@@ -17,7 +17,7 @@ class SchoolController(
     }
 
     @GetMapping("/{id}")
-    fun findSchoolById(@PathVariable id: Long): Optional<School> {
+    fun findSchoolById(@PathVariable id: UUID): Optional<School> {
         return schoolService.findSchoolById(id)
     }
 
@@ -27,12 +27,12 @@ class SchoolController(
     }
 
     @PutMapping("/{schoolId}")
-    fun updateSchool(@PathVariable schoolId: Long, @RequestBody updatedSchoolDto: SchoolDto): School {
+    fun updateSchool(@PathVariable schoolId: UUID, @RequestBody updatedSchoolDto: SchoolDto): School {
         return schoolService.updateSchool(schoolId, updatedSchoolDto)
     }
 
     @DeleteMapping("/{schoolId}")
-    fun deleteSchool(@PathVariable schoolId: Long) {
+    fun deleteSchool(@PathVariable schoolId: UUID) {
         schoolService.deleteSchool(schoolId)
     }
 }

@@ -18,7 +18,7 @@ class SchoolService(
         return schoolRepository.findAll()
     }
 
-    fun findSchoolById(id: Long): Optional<School> {
+    fun findSchoolById(id: UUID): Optional<School> {
         return schoolRepository.findById(id)
     }
 
@@ -26,7 +26,7 @@ class SchoolService(
         return schoolRepository.save(schoolMapper.toEntity(schoolDto))
     }
 
-    fun updateSchool(schoolId: Long, updatedSchoolDto: SchoolDto): School {
+    fun updateSchool(schoolId: UUID, updatedSchoolDto: SchoolDto): School {
         val existingSchool = checkIfSchoolExists(schoolId)
         existingSchool?.apply {
             name = updatedSchoolDto.name
@@ -37,11 +37,11 @@ class SchoolService(
         return schoolRepository.save(existingSchool!!)
     }
 
-    fun deleteSchool(schoolId: Long) {
+    fun deleteSchool(schoolId: UUID) {
         checkIfSchoolExists(schoolId)
         return schoolRepository.deleteById(schoolId)
     }
 
-    private fun checkIfSchoolExists(schoolId: Long): School? = schoolRepository.findById(schoolId)
+    private fun checkIfSchoolExists(schoolId: UUID): School? = schoolRepository.findById(schoolId)
         .orElseThrow { EntityNotFoundException("School not found with id: $schoolId") }
 }
