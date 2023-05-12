@@ -1,5 +1,6 @@
 package com.core.sgapp.service
 
+import com.core.sgapp.config.id.SchoolId
 import com.core.sgapp.dto.SchoolDto
 import com.core.sgapp.entities.School
 import com.core.sgapp.mapper.SchoolMapper
@@ -18,7 +19,7 @@ class SchoolService(
         return schoolRepository.findAll()
     }
 
-    fun findSchoolById(id: UUID): Optional<School> {
+    fun findSchoolById(id: SchoolId): Optional<School> {
         return schoolRepository.findById(id)
     }
 
@@ -26,7 +27,7 @@ class SchoolService(
         return schoolRepository.save(schoolMapper.toEntity(schoolDto))
     }
 
-    fun updateSchool(schoolId: UUID, updatedSchoolDto: SchoolDto): School {
+    fun updateSchool(schoolId: SchoolId, updatedSchoolDto: SchoolDto): School {
         val existingSchool = checkIfSchoolExists(schoolId)
         existingSchool?.apply {
             name = updatedSchoolDto.name
@@ -37,11 +38,11 @@ class SchoolService(
         return schoolRepository.save(existingSchool!!)
     }
 
-    fun deleteSchool(schoolId: UUID) {
+    fun deleteSchool(schoolId: SchoolId) {
         checkIfSchoolExists(schoolId)
         return schoolRepository.deleteById(schoolId)
     }
 
-    private fun checkIfSchoolExists(schoolId: UUID): School? = schoolRepository.findById(schoolId)
+    private fun checkIfSchoolExists(schoolId: SchoolId): School? = schoolRepository.findById(schoolId)
         .orElseThrow { EntityNotFoundException("School not found with id: $schoolId") }
 }

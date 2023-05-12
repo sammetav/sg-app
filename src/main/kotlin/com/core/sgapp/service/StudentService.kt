@@ -1,5 +1,6 @@
 package com.core.sgapp.service
 
+import com.core.sgapp.config.id.SchoolId
 import com.core.sgapp.dto.StudentDto
 import com.core.sgapp.entities.Student
 import com.core.sgapp.repository.StudentRepository
@@ -17,7 +18,7 @@ class StudentService(
         return studentRepository.findAll()
     }
 
-    fun createStudent(schoolId: UUID, studentDto: StudentDto): Student {
+    fun createStudent(schoolId: SchoolId, studentDto: StudentDto): Student {
         val student = studentDto.toEntity()
         val school = schoolService.findSchoolById(schoolId)
         student.school = school.orElseThrow { EntityNotFoundException("School not found with ID: $schoolId") }

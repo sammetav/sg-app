@@ -1,5 +1,6 @@
 package com.core.sgapp.controller
 
+import com.core.sgapp.config.id.SchoolId
 import com.core.sgapp.dto.SchoolDto
 import com.core.sgapp.entities.School
 import com.core.sgapp.service.SchoolService
@@ -17,7 +18,7 @@ class SchoolController(
     }
 
     @GetMapping("/{id}")
-    fun findSchoolById(@PathVariable id: UUID): Optional<School> {
+    fun findSchoolById(@PathVariable id: SchoolId): Optional<School> {
         return schoolService.findSchoolById(id)
     }
 
@@ -27,12 +28,12 @@ class SchoolController(
     }
 
     @PutMapping("/{schoolId}")
-    fun updateSchool(@PathVariable schoolId: UUID, @RequestBody updatedSchoolDto: SchoolDto): School {
+    fun updateSchool(@PathVariable schoolId: SchoolId, @RequestBody updatedSchoolDto: SchoolDto): School {
         return schoolService.updateSchool(schoolId, updatedSchoolDto)
     }
 
     @DeleteMapping("/{schoolId}")
-    fun deleteSchool(@PathVariable schoolId: UUID) {
+    fun deleteSchool(@PathVariable schoolId: SchoolId) {
         schoolService.deleteSchool(schoolId)
     }
 }

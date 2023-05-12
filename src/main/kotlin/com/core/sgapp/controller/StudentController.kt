@@ -1,5 +1,6 @@
 package com.core.sgapp.controller
 
+import com.core.sgapp.config.id.SchoolId
 import com.core.sgapp.dto.StudentDto
 import com.core.sgapp.entities.Student
 import com.core.sgapp.service.SchoolService
@@ -26,7 +27,7 @@ class StudentController(
 
     @PostMapping("/{schoolId}/createStudent")
     fun createStudent(
-        @PathVariable schoolId: UUID,
+        @PathVariable schoolId: SchoolId,
         @RequestBody studentDto: StudentDto
     ): Student {
         return studentService.createStudent(schoolId, studentDto = studentDto)
